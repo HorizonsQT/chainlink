@@ -17,7 +17,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import MenuIcon from '@material-ui/icons/Menu'
 import classNames from 'classnames'
-import React from 'react'
+import React, { MutableRefObject } from 'react'
 import { connect } from 'react-redux'
 import ReactResizeDetector from 'react-resize-detector'
 import { bindActionCreators, Dispatch } from 'redux'
@@ -187,7 +187,7 @@ const styles = ({ palette, spacing, zIndex }: Theme) =>
 interface Props extends WithStyles<typeof styles> {
   fetchCount: number
   authenticated: boolean
-  drawerContainer: HTMLElement | null
+  drawerContainer: MutableRefObject<HTMLElement | null>
   submitSignOut: () => void
   onResize: (width: number, height: number) => void
   url?: string

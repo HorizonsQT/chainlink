@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MutableRefObject } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { Theme } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
@@ -90,22 +90,18 @@ const styles = (theme: Theme) => {
 
 const Private = ({ classes }: { classes: { content: string } }) => {
   const [headerHeight, setHeaderHeight] = React.useState(0)
-
-  let drawerContainer: HTMLElement | null = null
+  const drawerContainerRef: MutableRefObject<HTMLElement | null> = React.useRef(
+    null,
+  )
 
   return (
     <Grid container spacing={0}>
       <Grid item xs={12}>
         <Header
           onResize={(_width, height) => setHeaderHeight(height)}
-          drawerContainer={drawerContainer}
+          drawerContainer={drawerContainerRef}
         />
-        <main
-          ref={ref => {
-            drawerContainer = ref
-          }}
-          style={{ paddingTop: headerHeight }}
-        >
+        <main ref={drawerContainerRef} style={{ paddingTop: headerHeight }}>
           <Notifications />
 
           <div className={classes.content}>
